@@ -1,93 +1,113 @@
 # Discord Messenger
 
-A simple website that lets users **sign in with Discord** and **send direct messages** to any Discord user by their User ID.
+**A real website** where users sign in with Discord and send direct messages to their friends.
 
-Messages are sent from the logged-in user's own Discord account using the official Discord API.
+Live demo style app — deploy it yourself in under 5 minutes for free.
 
-## Features
+---
 
-- Discord OAuth2 login (secure, uses `identify` scope only)
-- Clean, Discord-inspired dark UI
-- Send DMs by pasting a friend's Discord User ID
-- Responsive design
+## Deploy as a Website (Recommended)
 
-## Prerequisites
+### Option 1: Deploy on Render (easiest free option)
 
-- Node.js 18+
-- A Discord Application (free) from the [Discord Developer Portal](https://discord.com/developers/applications)
+1. Go to [https://render.com](https://render.com) and sign up (free).
+2. Click **New + → Blueprint**.
+3. Connect your GitHub account and select the `discord-messenger` repository.
+4. Render will detect the `render.yaml` file.
+5. Fill in these environment variables when asked:
 
-## Setup
+   | Key | Value |
+   |-----|-------|
+   | `DISCORD_CLIENT_ID` | Your Discord Client ID |
+   | `DISCORD_CLIENT_SECRET` | Your Discord Client Secret |
+   | `REDIRECT_URI` | `https://your-app-name.onrender.com/auth/callback` |
 
-### 1. Create a Discord Application
+6. Click **Apply**. Wait ~2 minutes for it to deploy.
+7. Copy the URL Render gives you (e.g. `https://discord-messenger-xxxx.onrender.com`).
 
-1. Go to https://discord.com/developers/applications and click **New Application**.
-2. Give it a name (e.g. "My Messenger") and create it.
-3. Go to **OAuth2 → General**.
-4. Copy the **Client ID** and **Client Secret**.
-5. Under **Redirects**, add:
-   ```
-   http://localhost:3000/auth/callback
-   ```
-   (Add your production URL later if you deploy.)
-6. Save changes.
+8. **Important final step**  
+   Go back to the [Discord Developer Portal](https://discord.com/developers/applications) → your app → **OAuth2 → Redirects**  
+   Add the exact URL:  
+   `https://your-app-name.onrender.com/auth/callback`  
+   and save.
 
-### 2. Clone & install
+Your website is now live!
+
+### Option 2: Deploy on Railway
+
+1. Go to [https://railway.app](https://railway.app)
+2. New Project → Deploy from GitHub → select this repo
+3. Add the same environment variables as above
+4. Set `REDIRECT_URI` to the Railway domain + `/auth/callback`
+5. Add that redirect URL in Discord Developer Portal
+
+---
+
+## Local Development
 
 ```bash
 git clone https://github.com/roseplayz12345yt/discord-messenger.git
 cd discord-messenger
 npm install
-```
-
-### 3. Configure environment
-
-```bash
 cp .env.example .env
 ```
 
-Edit `.env` and fill in:
+Edit `.env`:
 
 ```env
-DISCORD_CLIENT_ID=your_client_id_here
-DISCORD_CLIENT_SECRET=your_client_secret_here
+DISCORD_CLIENT_ID=your_client_id
+DISCORD_CLIENT_SECRET=your_client_secret
 REDIRECT_URI=http://localhost:3000/auth/callback
-SESSION_SECRET=any-long-random-string-you-like
+SESSION_SECRET=any-long-random-string
 ```
 
-### 4. Run
+Then run:
 
 ```bash
 npm start
 ```
 
-Open http://localhost:3000 in your browser.
+Open http://localhost:3000
 
-## How to get a friend's Discord User ID
+---
 
-1. In Discord, go to **User Settings → Advanced** and enable **Developer Mode**.
-2. Right-click the user → **Copy User ID**.
-3. Paste it into the form on the website.
+## How to create the Discord Application
 
-**Important:** Discord will only deliver the DM if:
-- The recipient has you as a friend, **or**
-- You share a server and they allow DMs from server members.
+1. Visit https://discord.com/developers/applications
+2. Click **New Application** → give it a name
+3. Go to **OAuth2**
+4. Copy **Client ID** and **Client Secret**
+5. Under **Redirects**, add both:
+   - `http://localhost:3000/auth/callback` (for local testing)
+   - Your production URL (e.g. `https://your-app.onrender.com/auth/callback`)
 
-Otherwise you will get an error from the Discord API.
+---
 
-## Deploying
+## How users send messages
 
-You can deploy this to any Node.js host (Render, Railway, Fly.io, Vercel with serverless adapter, etc.).
+1. Click **Sign in with Discord**
+2. Authorize the app
+3. Paste a friend’s Discord User ID
+4. Type a message and send
 
-1. Set the same environment variables on the host.
-2. Update `REDIRECT_URI` to your production URL (e.g. `https://your-app.onrender.com/auth/callback`).
-3. Add that exact URL to the Discord application's OAuth2 Redirects list.
+**To get someone’s Discord User ID:**
+- Enable **Developer Mode** in Discord (User Settings → Advanced)
+- Right-click their name → **Copy User ID**
 
-## Security notes
+---
 
-- The app only requests the `identify` scope.
-- Access tokens stay on the server (session) and are never exposed to the browser.
-- Never commit your real `.env` file.
+## Features
 
-## License
+- Clean Discord-inspired dark theme
+- Secure OAuth2 login (tokens never leave the server)
+- Send real DMs from the user’s own account
+- Mobile-friendly
 
-MIT
+## Notes
+
+- Discord only delivers the message if the recipient has you as a friend **or** allows DMs from server members.
+- The free tier on Render sleeps after inactivity (first load can take ~30 seconds).
+
+---
+
+Made with Discord OAuth2 + Express
