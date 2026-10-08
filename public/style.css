@@ -1,0 +1,263 @@
+:root {
+  --bg: #1e1f22;
+  --bg-secondary: #2b2d31;
+  --bg-tertiary: #313338;
+  --text: #f2f3f5;
+  --text-muted: #b5bac1;
+  --accent: #5865f2;
+  --accent-hover: #4752c4;
+  --success: #23a559;
+  --error: #f23f43;
+  --border: #3f4147;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+
+.logo svg {
+  color: var(--accent);
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#username {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+main {
+  flex: 1;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text);
+  padding: 8px 14px;
+  font-size: 0.875rem;
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+.btn-large {
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+input,
+textarea {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#send-btn {
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.status {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.status.success {
+  background: rgba(35, 165, 89, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(35, 165, 89, 0.3);
+}
+
+.status.error {
+  background: rgba(242, 63, 67, 0.15);
+  color: var(--error);
+  border: 1px solid rgba(242, 63, 67, 0.3);
+}
+
+.info-card {
+  background: var(--bg-tertiary);
+}
+
+.info-card ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+.info-card li {
+  margin-bottom: 6px;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+footer {
+  margin-top: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  .user-area #username {
+    display: none;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
