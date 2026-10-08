@@ -27,8 +27,19 @@ app.use(
   })
 );
 
-// Login - redirect to Discord OAuth
+// Public config so the frontend can build the Discord OAuth URL
+app.get('/api/config', (req, res) => {
+  res.json({
+    clientId: CLIENT_ID || null,
+    redirectUri: REDIRECT_URI,
+  });
+});
+
+// Login - redirect to Discord OAuth (kept as backup)
 app.get('/auth/login', (req, res) => {
+  if (!CLIENT_ID) {
+    return res.status(500).send('DISCORD_CLIENT_ID is not configured on the server.');
+  }
   const params = new URLSearchParams({
     client_id: CLIENT_ID,
     redirect_uri: REDIRECT_URI,
