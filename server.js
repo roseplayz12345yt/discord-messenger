@@ -41,7 +41,7 @@ app.get('/auth/login', (req, res) => {
     return res.status(500).send('DISCORD_CLIENT_ID is not configured on the server.');
   }
   const params = new URLSearchParams({
-    client_id: CLIENT_ID,
+    client_id: 1557662601826148353,
     redirect_uri: REDIRECT_URI,
     response_type: 'code',
     scope: 'identify',
@@ -62,7 +62,7 @@ app.get('/auth/callback', async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        client_id: CLIENT_ID,
+        client_id: 1557662601826148353,
         client_secret: CLIENT_SECRET,
         grant_type: 'authorization_code',
         code,
